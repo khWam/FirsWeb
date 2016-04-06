@@ -13,7 +13,6 @@
 		<c:forEach var="object" items="${listObjects}">
 			<li>${object.temperature}</li> 
 			<li>${object.pression}</li> 
-
 		</c:forEach>
 	</ul>0
 </body>
