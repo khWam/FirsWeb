@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.demos.data.ClimatisationDAO;
+import fr.demos.data.FileClimatisationDAO;
 import fr.demos.web.Climatisation;
 
 import java.util.ArrayList;
@@ -126,30 +128,17 @@ public class saisieClimatisationControleur extends HttpServlet {
 			}
 
 			if(!errors){
-
-				ArrayList<Climatisation> listClim = new ArrayList<>();
-				//Climatisation clim=null;
-				try(ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream("climatisationFile")))){
-					listClim =(ArrayList) ois.readObject();
-
-				}catch(IOException e){request.setAttribute("fichierObjectNotFoundException","fichierObjectNotFoundException");
-				}catch(ClassNotFoundException exp){request.setAttribute("classNotFoundException",  "classNotFoundException");}
-
 				Climatisation clim= new Climatisation(temp, pres, humid, nomAppareil, date);
-				listClim.add(clim);
-
-
-				try(ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("climatisationFile")));){
-					oos.writeObject(listClim);
-					oos.flush();
-				}catch(IOException e){request.setAttribute("ecritureFichierErreur", e.getMessage());}
+				ClimatisationDAO dao = new FileClimatisationDAO();
+				try{
+					dao.sauve(clim, "climatisationFile");
+				}catch(Exception e){e.printStackTrace();}
 
 				rd=request.getRequestDispatcher("/successClimatisation.jsp");
 
 
-				//  out.println("trrrrrrrrrrrrrrrr");
-				} 
+			} 
 
-			}rd.forward(request, response);
-		}
+		}rd.forward(request, response);
 	}
+}

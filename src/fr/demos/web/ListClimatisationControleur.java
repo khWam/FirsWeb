@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.demos.data.ClimatisationDAO;
+import fr.demos.data.FileClimatisationDAO;
 import fr.demos.web.Climatisation;
 
 /**
@@ -38,15 +40,17 @@ public class ListClimatisationControleur extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		RequestDispatcher rd = request.getRequestDispatcher("/listClimatisation.jsp");
-		ArrayList<Climatisation> listClim = new ArrayList<Climatisation>();
+		ArrayList<Climatisation> listClim;
+		ClimatisationDAO dao = new FileClimatisationDAO();
+		listClim = new ArrayList<Climatisation>();
+		
 		//Climatisation clim=null;
-		try(ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream("climatisationFile")))){
-			listClim= (ArrayList<Climatisation>) ois.readObject();
+		try{
+			listClim= (ArrayList<Climatisation>) dao.rechercheTout("climatisationFile") ;
 			
-		}catch(IOException e){request.setAttribute("fichierObjectNotFoundException","fichierObjectNotFoundException");
-		}catch(ClassNotFoundException exp){request.setAttribute("classNotFoundException",  "classNotFoundException");
+		}catch(Exception e){e.printStackTrace();}
 
-		}
+		
 		request.setAttribute("listObjects", listClim);
 		rd.forward(request, response);
 
