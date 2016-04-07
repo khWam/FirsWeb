@@ -9,11 +9,23 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<c:choose>
+
+		<c:when test="${not empty sessionScope.pseudo}">
+			<div>${sessionScope.pseudo} est connecté</div>
+			<a href="LogOutControleur"> se déconnecter</a>
+		</c:when>
+		<c:otherwise>
+		<a href="sessionControleur"> se connecter</a>
+		</c:otherwise>
+
+	</c:choose>
+<a href ="saisieClimatisationControleur"> saisie d'une climatisation</a>
 	<ul>
 		<c:forEach var="object" items="${listObjects}">
-			<li>${object.temperature}</li> 
-			<li>${object.pression}</li> 
+			<li>${object}</li>
+		<%-- 	<li>${object.pression}</li> --%>
 		</c:forEach>
-	</ul>0
+	</ul>
 </body>
 </html>

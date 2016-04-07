@@ -1,4 +1,4 @@
-package fr.demos;
+
 
 import java.io.IOException;
 
@@ -10,19 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.sun.research.ws.wadl.Request;
+import fr.demos.sessionControleur;
 
 /**
- * Servlet implementation class sessionControleur
+ * Servlet implementation class LogOutControleur
  */
-@WebServlet("/sessionControleur")
-public class sessionControleur extends HttpServlet {
+@WebServlet("/LogOutControleur")
+public class LogOutControleur extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public sessionControleur() {
+    public LogOutControleur() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,8 +33,11 @@ public class sessionControleur extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		RequestDispatcher rd = request.getRequestDispatcher("/sessionView.jsp");
-		rd.forward(request, response);
+	RequestDispatcher rd = request.getRequestDispatcher("/sessionControleur");
+	HttpSession session = request.getSession();
+	session.invalidate();
+	rd.forward(request, response);
+	
 	}
 
 	/**
@@ -42,26 +45,7 @@ public class sessionControleur extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doGet(request, response);
-		RequestDispatcher rd = request.getRequestDispatcher("/sessionView.jsp");
-		request.setCharacterEncoding("UTF-8");
-		HttpSession session = request.getSession();
-		
-		String action = request.getParameter("Action");
-		if(action!=null && action.equals("Connecter")){
-			String pseudo = request.getParameter("Pseudo");
-			pseudo =pseudo.trim();
-			if(pseudo!=null && !pseudo.equals("")){
-				//login ok
-				session.setAttribute("pseudo", pseudo);
-				rd=request.getRequestDispatcher("ListClimatisationControleur");
-			}
-			else{
-				request.setAttribute("pseudoError", "pseudo obligatoire");
-			}
-		}
-		rd.forward(request, response);
-		
+		doGet(request, response);
 	}
 
 }
