@@ -1,3 +1,4 @@
+package fr.demos.web;
 
 
 import java.io.BufferedInputStream;
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import fr.demos.Climatisation;
+import fr.demos.web.Climatisation;
 
 /**
  * Servlet implementation class ListClimatisationControleur

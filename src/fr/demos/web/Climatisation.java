@@ -1,4 +1,4 @@
-package fr.demos;
+package fr.demos.web;
 
 import java.io.Serializable;
 
