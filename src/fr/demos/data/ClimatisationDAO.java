@@ -10,5 +10,5 @@ public interface ClimatisationDAO {
 	void sauve (Climatisation cl, String FileName) throws Exception;
 	List<Climatisation> rechercheTout(String FileName) throws Exception;
 	List<Climatisation> recherche (String critere, String Filename) throws Exception;
-	
+	int nombre(String criter, String FileName) ;
 }

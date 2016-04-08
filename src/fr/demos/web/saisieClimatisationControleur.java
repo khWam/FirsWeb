@@ -132,9 +132,10 @@ public class saisieClimatisationControleur extends HttpServlet {
 				ClimatisationDAO dao = new FileClimatisationDAO();
 				try{
 					dao.sauve(clim, "climatisationFile");
-				}catch(Exception e){e.printStackTrace();}
+				    rd=request.getRequestDispatcher("/successClimatisation.jsp");
 
-				rd=request.getRequestDispatcher("/successClimatisation.jsp");
+				}catch(Exception e){request.setAttribute("sauveErreur", e.getMessage());}
+
 
 
 			} 

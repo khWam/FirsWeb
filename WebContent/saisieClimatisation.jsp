@@ -24,7 +24,7 @@
 		Nom Appareil: <br/> <input type="text" name="nomAppareil" value="${Nom}"/><span> ${appareilErreur}</span> <br />
 		Date (Année):<br/> <input type="text" name="Date" value="${uneDate}"/><span> ${dateErreurs}</span> <br />
 <br><br>
-<input type="submit" value="enregistrer" name="Submit"> 
+<input type="submit" value="enregistrer" name="Submit"><span>${sauveErreur}</span> <br />
 	</form>
 </body>
 </html>

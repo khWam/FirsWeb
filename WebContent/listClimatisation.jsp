@@ -21,6 +21,7 @@
 
 	</c:choose>
 <a href ="saisieClimatisationControleur"> saisie d'une climatisation</a>
+	<span> ${erreurAffichage} </span>
 	<ul>
 		<c:forEach var="object" items="${listObjects}">
 			<li>${object}</li>

@@ -38,28 +38,34 @@ public class FileClimatisationDAO implements ClimatisationDAO {
 	@Override
 	public void sauve(Climatisation cl, String FileName) throws Exception {
 		// TODO Auto-generated method stub
-		ArrayList<Climatisation> listClim = new ArrayList<>();
-		
-        listClim = (ArrayList<Climatisation>) this.rechercheTout(FileName);
+		ArrayList<Climatisation> listClim = null;
+
+
+		try{
+			listClim = (ArrayList<Climatisation>) this.rechercheTout(FileName);
+		}catch(Exception e){
+
+			System.out.println(e.getMessage());
+			listClim=new ArrayList<>();
+		}	
 		listClim.add(cl);
 
 
 		try(ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(FileName)));){
 			oos.writeObject(listClim);
 			oos.flush();
-		}catch(IOException e){System.out.println(e.getMessage());}
+		}
 	}
 
 	@Override
 	public List<Climatisation> rechercheTout(String FileName) throws Exception {
-		
+
 		ArrayList<Climatisation> listClim = new ArrayList<>();
-		
+
 		try(ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(FileName)))){
 			listClim =(ArrayList<Climatisation>) ois.readObject();
+		}
 
-		}catch(IOException e){System.out.println(e.getMessage());
-		}catch(ClassNotFoundException exp){System.out.println(exp.getMessage());}
 		return listClim;
 	}
 	@Override
@@ -67,5 +73,20 @@ public class FileClimatisationDAO implements ClimatisationDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public int nombre(String criter, String FileName)  {
+		ArrayList<Climatisation> listClim=null;
+		int nb=0;
+		try {
+			listClim=(ArrayList<Climatisation>) this.rechercheTout(FileName);
+			nb=listClim.size();
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}
+		return nb;
+	}
+
 
 }
