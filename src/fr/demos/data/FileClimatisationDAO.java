@@ -79,7 +79,7 @@ public class FileClimatisationDAO implements ClimatisationDAO {
 		ArrayList<Climatisation> listClim=null;
 		int nb=0;
 		try {
-			listClim=(ArrayList<Climatisation>) this.rechercheTout(FileName);
+			listClim= (ArrayList<Climatisation>) this.rechercheTout(FileName);
 			nb=listClim.size();
 		} catch (Exception e) {
 			// TODO: handle exception
