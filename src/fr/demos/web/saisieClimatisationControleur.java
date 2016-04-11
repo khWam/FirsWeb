@@ -131,14 +131,16 @@ public class saisieClimatisationControleur extends HttpServlet {
 			if(!errors){
 				Climatisation clim= new Climatisation(temp, pres, humid, nomAppareil, date);
 				//ClimatisationDAO dao = new FileClimatisationDAO("climatisationFile");
-				ClimatisationDAO dao;
+				
 				try {
+					ClimatisationDAO dao;
 					dao = new SQLClimatisationDAO("jdbc/appliclim");
 					dao.sauve(clim);
 				    rd=request.getRequestDispatcher("/successClimatisation.jsp");
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					request.setAttribute("sauveErreur", e1.getMessage());
+					rd=request.getRequestDispatcher("/saisieClimatisation.jsp");
 				}
 				
 

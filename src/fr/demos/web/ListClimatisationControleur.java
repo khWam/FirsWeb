@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.demos.data.ClimatisationDAO;
 import fr.demos.data.FileClimatisationDAO;
+import fr.demos.data.SQLClimatisationDAO;
 import fr.demos.web.Climatisation;
 
 /**
@@ -40,16 +41,21 @@ public class ListClimatisationControleur extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		RequestDispatcher rd = request.getRequestDispatcher("/listClimatisation.jsp");
-		ArrayList<Climatisation> listClim;
-		ClimatisationDAO dao = new FileClimatisationDAO("climatisationFile");
-		listClim = new ArrayList<Climatisation>();
+		ArrayList<Climatisation> listClim = null;
+		//ClimatisationDAO dao = new FileClimatisationDAO("climatisationFile");
+		ClimatisationDAO dao;
+		try {
+			dao = new SQLClimatisationDAO("jdbc/appliclim");
+			listClim = new ArrayList<Climatisation>();
+			listClim= (ArrayList<Climatisation>) dao.rechercheTout() ;
+		} catch (Exception e) {
+			
+		request.setAttribute("erreurAffichage",e.getMessage());
+		}
+		
 		
 		//Climatisation clim=null;
-		try{
-			listClim= (ArrayList<Climatisation>) dao.rechercheTout() ;
-			
-		}catch(Exception e){request.setAttribute("erreurAffichage",e.getMessage());}
-
+	
 		
 		request.setAttribute("listObjects", listClim);
 		rd.forward(request, response);

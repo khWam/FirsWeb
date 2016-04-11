@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.demos.data.ClimatisationDAO;
 import fr.demos.data.FileClimatisationDAO;
+import fr.demos.data.SQLClimatisationDAO;
 
 /**
  * Servlet implementation class ClimatisationAjax
@@ -33,10 +34,20 @@ public class ClimatisationAjax extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		ClimatisationDAO dao = new FileClimatisationDAO("climatisationFile");
-		int nb = dao.nombre("");
-		PrintWriter out =response.getWriter();
-		out.println("il y a "+nb+" climatisation enregistrées");
+		//ClimatisationDAO dao = new FileClimatisationDAO("climatisationFile");
+	 PrintWriter out =response.getWriter();
+
+		ClimatisationDAO dao;
+		try {
+			dao = new SQLClimatisationDAO("jdbc/appliclim");
+			int nc = dao.nombre("");
+			out.println("il y a "+nc+" climatisation enregistrees");
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 
 	};
 
