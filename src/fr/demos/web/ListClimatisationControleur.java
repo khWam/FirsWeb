@@ -41,12 +41,12 @@ public class ListClimatisationControleur extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		RequestDispatcher rd = request.getRequestDispatcher("/listClimatisation.jsp");
 		ArrayList<Climatisation> listClim;
-		ClimatisationDAO dao = new FileClimatisationDAO();
+		ClimatisationDAO dao = new FileClimatisationDAO("climatisationFile");
 		listClim = new ArrayList<Climatisation>();
 		
 		//Climatisation clim=null;
 		try{
-			listClim= (ArrayList<Climatisation>) dao.rechercheTout("climatisationFile") ;
+			listClim= (ArrayList<Climatisation>) dao.rechercheTout() ;
 			
 		}catch(Exception e){request.setAttribute("erreurAffichage",e.getMessage());}
 

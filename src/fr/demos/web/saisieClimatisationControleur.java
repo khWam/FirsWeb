@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.demos.data.ClimatisationDAO;
 import fr.demos.data.FileClimatisationDAO;
+import fr.demos.data.SQLClimatisationDAO;
 import fr.demos.web.Climatisation;
 
 import java.util.ArrayList;
@@ -129,14 +130,17 @@ public class saisieClimatisationControleur extends HttpServlet {
 
 			if(!errors){
 				Climatisation clim= new Climatisation(temp, pres, humid, nomAppareil, date);
-				ClimatisationDAO dao = new FileClimatisationDAO();
-				try{
-					dao.sauve(clim, "climatisationFile");
+				//ClimatisationDAO dao = new FileClimatisationDAO("climatisationFile");
+				ClimatisationDAO dao;
+				try {
+					dao = new SQLClimatisationDAO("jdbc/appliclim");
+					dao.sauve(clim);
 				    rd=request.getRequestDispatcher("/successClimatisation.jsp");
-
-				}catch(Exception e){request.setAttribute("sauveErreur", e.getMessage());}
-
-
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					request.setAttribute("sauveErreur", e1.getMessage());
+				}
+				
 
 			} 
 

@@ -33,8 +33,8 @@ public class ClimatisationAjax extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		ClimatisationDAO dao = new FileClimatisationDAO();
-		int nb = dao.nombre("", "climatisationFile");
+		ClimatisationDAO dao = new FileClimatisationDAO("climatisationFile");
+		int nb = dao.nombre("");
 		PrintWriter out =response.getWriter();
 		out.println("il y a "+nb+" climatisation enregistrées");
 

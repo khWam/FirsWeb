@@ -95,37 +95,37 @@ public double getTemperature() {
 		return pression;
 }
 //
-//	public void setPression(double pression) {
-//		this.pression = pression;
-//	}
-//
-//	public int getHumidite() {
-//		return humidite;
-//	}
-//
-//	public void setHumidite(int humidite) {
-//		this.humidite = humidite;
-//	}
-//
-//	public String getNomAppareil() {
-//		return nomAppareil;
-//	}
-//
-//	public void setNomAppareil(String nomAppareil) {
-//		this.nomAppareil = nomAppareil;
-//	}
-//
-//	public long getDatation() {
-//		return datation;
-//	}
-//
-//	public void setDatation(long datation) {
-//		this.datation = datation;
-//	}
-//
-//	public static long getSerialversionuid() {
-//		return serialVersionUID;
-//	}
+	public void setPression(double pression) {
+		this.pression = pression;
+	}
+
+	public int getHumidite() {
+		return humidite;
+	}
+
+	public void setHumidite(int humidite) {
+		this.humidite = humidite;
+	}
+
+	public String getNomAppareil() {
+		return nomAppareil;
+	}
+
+	public void setNomAppareil(String nomAppareil) {
+		this.nomAppareil = nomAppareil;
+	}
+
+	public long getDatation() {
+		return datation;
+	}
+
+	public void setDatation(long datation) {
+		this.datation = datation;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 
 

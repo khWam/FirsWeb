@@ -35,14 +35,21 @@ import fr.demos.web.Climatisation;
 
 public class FileClimatisationDAO implements ClimatisationDAO {
 
+	private String fileName;
+	
+	public FileClimatisationDAO(String fileName) {
+		super();
+		this.fileName = fileName;
+	}
+
 	@Override
-	public void sauve(Climatisation cl, String FileName) throws Exception {
+	public void sauve(Climatisation cl) throws Exception {
 		// TODO Auto-generated method stub
 		ArrayList<Climatisation> listClim = null;
 
 
 		try{
-			listClim = (ArrayList<Climatisation>) this.rechercheTout(FileName);
+			listClim = (ArrayList<Climatisation>) this.rechercheTout();
 		}catch(Exception e){
 
 			System.out.println(e.getMessage());
@@ -51,35 +58,35 @@ public class FileClimatisationDAO implements ClimatisationDAO {
 		listClim.add(cl);
 
 
-		try(ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(FileName)));){
+		try(ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(this.fileName)));){
 			oos.writeObject(listClim);
 			oos.flush();
 		}
 	}
 
 	@Override
-	public List<Climatisation> rechercheTout(String FileName) throws Exception {
+	public List<Climatisation> rechercheTout() throws Exception {
 
 		ArrayList<Climatisation> listClim = new ArrayList<>();
 
-		try(ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(FileName)))){
+		try(ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(this.fileName)))){
 			listClim =(ArrayList<Climatisation>) ois.readObject();
 		}
 
 		return listClim;
 	}
 	@Override
-	public List<Climatisation> recherche(String critere, String FileName) throws Exception {
+	public List<Climatisation> recherche(String critere) throws Exception {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public int nombre(String criter, String FileName)  {
+	public int nombre(String criter)  {
 		ArrayList<Climatisation> listClim=null;
 		int nb=0;
 		try {
-			listClim= (ArrayList<Climatisation>) this.rechercheTout(FileName);
+			listClim= (ArrayList<Climatisation>) this.rechercheTout();
 			nb=listClim.size();
 		} catch (Exception e) {
 			// TODO: handle exception
