@@ -2,6 +2,14 @@ package fr.demos.web;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+@Entity
+@Table(name="clim")
 public class Climatisation implements Serializable {
 
 	/**
@@ -14,20 +22,29 @@ public class Climatisation implements Serializable {
 	static int tempFerenheitAdd =40;
 	static double pressPoucesMercurrMulti = 0.0295299831; 
 	//----------------------------
-	
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)	
+	private long id;
 	
 	double temperature;
 	double pression;
 	int humidite;
+	@Column(length=30,nullable=false)
 	String nomAppareil;
+	@Column(nullable=false)
+
 	long datation=System.currentTimeMillis();
 	
+	
 	public Climatisation(){
-		nomAppareil="anonyme par defaut";
-		temperature= 30;
-	    humidite=30;
-		pression=1013;
+		
 	}
+//	public Climatisation(){
+//		nomAppareil="anonyme par defaut";
+//		temperature= 30;
+//	    humidite=30;
+//		pression=1013;
+//	}
 	
 	public Climatisation(double temperature, double pression, int humidite, String nomAppareil, long date){
 		this.datation = date;

@@ -10,6 +10,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 
+import javax.inject.Inject;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.demos.data.ClimatisationDAO;
 import fr.demos.data.FileClimatisationDAO;
+import fr.demos.data.HebernateClimatisationDAO;
 import fr.demos.data.SQLClimatisationDAO;
 import fr.demos.web.Climatisation;
 
@@ -33,6 +35,9 @@ import java.util.Map;
 public class saisieClimatisationControleur extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	
+	@Inject
+	private HebernateClimatisationDAO dao;
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
@@ -133,8 +138,8 @@ public class saisieClimatisationControleur extends HttpServlet {
 				//ClimatisationDAO dao = new FileClimatisationDAO("climatisationFile");
 				
 				try {
-					ClimatisationDAO dao;
-					dao = new SQLClimatisationDAO("jdbc/appliclim");
+					//ClimatisationDAO dao;
+					//dao = new SQLClimatisationDAO("jdbc/appliclim");
 					dao.sauve(clim);
 				    rd=request.getRequestDispatcher("/successClimatisation.jsp");
 				} catch (Exception e1) {
